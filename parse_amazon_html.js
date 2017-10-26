@@ -12,8 +12,8 @@ const BASE_URL = 'https://www.amazon.com/gp/product'
  * @param  {string} itemNum - Amazon item number (example: B00I8BIC9E)
  * @return {Promise} - Promise resolves to JS Array containing object for each item
  */
-const getAlsoPurchased = (itemNum) => {
-  return fetch(`${BASE_URL}/${itemNum}`)
+const getAlsoPurchased = itemNum =>
+  fetch(`${BASE_URL}/${itemNum}`)
     .then(res => res.text())
     .then((body) => {
       const $ = cheerio.load(body)
@@ -22,7 +22,6 @@ const getAlsoPurchased = (itemNum) => {
       return text.split('\n')
     })
     .catch(console.error)
-}
 
 module.exports = {
   getAlsoPurchased,
