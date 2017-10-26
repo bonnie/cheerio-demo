@@ -17,9 +17,11 @@ const getAlsoPurchased = itemNum =>
     .then(res => res.text())
     .then((body) => {
       const $ = cheerio.load(body)
-      const links = $('.sims-carousel-holder[data-similarity-type="purchase"] .a-carousel-card .a-link-normal')
-      const text = links.text()
-      return text.split('\n')
+      const text = [];
+      $('.p13n-sc-truncate', '#p13n-m-purchase-sims-feature-2').each((index, elem) => {
+        text.push($(elem).text().trim())
+      });
+      return text
     })
     .catch(console.error)
 
